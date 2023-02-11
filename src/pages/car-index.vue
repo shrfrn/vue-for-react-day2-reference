@@ -1,6 +1,7 @@
 <template>
     <section class="car-index">
-        <CarList @remove="removeCar" v-if="cars" :cars="cars" />
+        <CarFilter @filter="onSetFilterBy"/>
+        <CarList @remove="removeCar" v-if="cars" :cars="filteredCars" />
         <RouterLink to="/car/edit">
             <button>Add a Car</button>
         </RouterLink>
@@ -9,12 +10,14 @@
 
 <script>
 import { carService } from '../services/car.service.js'
+import CarFilter from '../cmps/car-filter.vue'
 import CarList from '../cmps/car-list.vue'
 
 export default {
     data() {
         return {
             cars: null,
+            filterBy: {},
         }
     },
     async created() {
@@ -25,9 +28,19 @@ export default {
             await carService.remove(carId)
             this.cars = this.cars.filter(car => car._id !== carId)
         },
+        onSetFilterBy(filterBy) {
+            this.filterBy = filterBy
+        }
+    },
+    computed: {
+        filteredCars() {
+            const regex = new RegExp(this.filterBy.txt, 'i')
+            return this.cars.filter(car => regex.test(car.vendor))
+        }
     },
     components: {
         CarList,
+        CarFilter,
     },
 }
 </script>
