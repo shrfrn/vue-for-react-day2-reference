@@ -1,11 +1,12 @@
-.car-preview {
+.car-details {
     display: grid;
     place-items: start;
 
     padding: 10px;
     background-color: darkseagreen;
-    
-    .actions > button {
-        margin-inline-start: 20px;
+    margin-block-start: 20px;
+
+    a {
+        justify-self: end;
     }
 }

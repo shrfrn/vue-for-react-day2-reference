@@ -3,7 +3,15 @@
         <ul class="car-list">
             <li  class="car-preview" v-for="car in cars" :key="car._id">
                 <CarPreview :car="car"/>
-                <button @click="onRemoveCar(car._id)">x</button>
+                <section class="actions">
+                    <RouterLink :to="`/car/${car._id}`">
+                        <button>Details</button>
+                    </RouterLink>
+                    <RouterLink :to="`/car/edit/${car._id}`">
+                        <button>Edit</button>
+                    </RouterLink>
+                    <button @click="onRemoveCar(car._id)">x</button>
+                </section>
             </li>
         </ul>
     </section>
