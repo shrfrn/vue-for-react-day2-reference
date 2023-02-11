@@ -1,5 +1,6 @@
 <template>
     <section class="car-index">
+        <UserMsg />
         <CarFilter @filter="onSetFilterBy"/>
         <CarList @remove="removeCar" v-if="cars" :cars="filteredCars" />
         <RouterLink to="/car/edit">
@@ -10,8 +11,11 @@
 
 <script>
 import { carService } from '../services/car.service.js'
+import { eventBus } from '../services/eventBus.service'
+
 import CarFilter from '../cmps/car-filter.vue'
 import CarList from '../cmps/car-list.vue'
+import UserMsg from '../cmps/user-msg.vue'
 
 export default {
     data() {
@@ -27,6 +31,7 @@ export default {
         async removeCar(carId) {
             await carService.remove(carId)
             this.cars = this.cars.filter(car => car._id !== carId)
+            eventBus.emit('user-msg')
         },
         onSetFilterBy(filterBy) {
             this.filterBy = filterBy
@@ -41,6 +46,7 @@ export default {
     components: {
         CarList,
         CarFilter,
+        UserMsg,
     },
 }
 </script>
