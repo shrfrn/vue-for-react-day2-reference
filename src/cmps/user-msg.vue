@@ -1,7 +1,9 @@
 <template>
-    <section v-if="msg" class="user-msg" :class="msg.type">
-        <p>User Msg</p>
-    </section>
+    <Transition>
+        <section v-if="msg" class="user-msg" :class="msg.type">
+            <p>User Msg</p>
+        </section>
+    </Transition>
 </template>
 
 <script>
@@ -21,9 +23,9 @@ export default {
     methods: {
         showMsg(msg) {
             this.msg = msg
-            setTimeout(() => this.msg = null, this.msg.timeout || 1500)
-        }
-    }
+            setTimeout(() => (this.msg = null), this.msg.timeout || 1500)
+        },
+    },
 }
 </script>
 
