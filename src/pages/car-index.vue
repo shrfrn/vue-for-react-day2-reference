@@ -1,6 +1,6 @@
 <template>
     <h1>Cars</h1>
-    <CarList v-if="cars" :cars="cars"/>
+    <CarList @remove="removeCar" v-if="cars" :cars="cars"/>
 </template>
 
 <script>
@@ -15,6 +15,12 @@ export default {
     },
     async created() {
         this.cars = await carService.query()
+    },
+    methods: {
+        async removeCar(carId) {
+            await carService.remove(carId)
+            this.cars = this.cars.filter(car => car._id !== carId)
+        }
     },
     components: {
         CarList,

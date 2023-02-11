@@ -3,7 +3,7 @@
         <ul class="car-list">
             <li  class="car-preview" v-for="car in cars" :key="car._id">
                 <CarPreview :car="car"/>
-                <button>x</button>
+                <button @click="onRemoveCar(car._id)">x</button>
             </li>
         </ul>
     </section>
@@ -16,6 +16,11 @@ export default {
         cars: {
             type: Array,
             required: true,
+        }
+    },
+    methods: {
+        onRemoveCar(carId) {
+            this.$emit('remove', carId)
         }
     },
     components: {
