@@ -1,0 +1,13 @@
+.car-edit {
+    display: grid;
+    place-items: start;
+    gap: 5px;
+
+    padding: 10px;
+    background-color: rgb(254, 206, 115);
+    margin-block-start: 20px;
+
+    button {
+        justify-self: end;
+    }
+}
