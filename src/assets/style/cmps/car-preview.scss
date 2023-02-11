@@ -1,0 +1,11 @@
+.car-preview {
+    display: grid;
+    place-items: start;
+
+    padding: 10px;
+    background-color: darkseagreen;
+    
+    button {
+        justify-self: end;
+    }
+}
