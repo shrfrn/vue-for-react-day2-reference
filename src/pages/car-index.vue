@@ -31,7 +31,12 @@ export default {
         async removeCar(carId) {
             await carService.remove(carId)
             this.cars = this.cars.filter(car => car._id !== carId)
-            eventBus.emit('user-msg')
+            const msg = {
+                txt: `Car ${carId} deleted.`,
+                type: 'error',
+                timeout: 2500,
+            }
+            eventBus.emit('user-msg', msg)
         },
         onSetFilterBy(filterBy) {
             this.filterBy = filterBy
